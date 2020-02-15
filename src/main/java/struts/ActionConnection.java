@@ -1,6 +1,7 @@
 package struts;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
 import facade.FacadeParis;
 import facade.FacadeParisStaticImpl;
 import facade.exceptions.InformationsSaisiesIncoherentesException;
@@ -70,9 +71,5 @@ public class ActionConnection extends ActionSupport implements SessionAware {
         return INPUT;
     }
 
-    public String deconnect()
-    {
-        session.clear();
-        return SUCCESS;
-    }
+
 }
