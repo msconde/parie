@@ -5,17 +5,13 @@
 <validators>
     <field name="username">
         <field-validator type="requiredstring" short-circuit="true">
-            <message>
-                Pseudo absent
-            </message>
+            <message key="ConnectionValidator.pseudo"/>
         </field-validator>
     </field>
 
     <field name="password">
         <field-validator type="requiredstring" short-circuit="true">
-            <message>
-                Mot de passe absent
-            </message>
+            <message key="ConnectionValidator.pass"/>
         </field-validator>
     </field>
 </validators>

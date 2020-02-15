@@ -14,8 +14,8 @@
     <%@include file="base.jsp"%>
     <b><s:property value="#session.user.login"/></b>
 
-    La mise de <s:property value="pariAnnule.montant"/> sur euros sur le résultat <s:property value="pariAnnule.vainqueur"/> pour
-    le match : <s:property value="pariAnnule.match.equipe1"/> vs <s:property value="pariAnnule.match.equipe2"/> le
-    <s:property value="pariAnnule.match.quand"/> a bien été annulée !
+    <s:text name="infoPariAnnuler.mise"/> <s:property value="pariAnnule.montant"/> <s:text name="infoPari.resultat"/> <s:property value="pariAnnule.vainqueur"/>
+    <s:text name="infoPari.match"/> <s:property value="pariAnnule.match.equipe1"/> <s:text name="infoPari.vs"/> <s:property value="pariAnnule.match.equipe2"/>
+    <s:text name="infoPari.le"/> <s:property value="pariAnnule.match.quand"/> <s:text name="infoPariAnnuler.annulee"/>
 </body>
 </html>

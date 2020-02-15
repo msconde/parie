@@ -21,29 +21,29 @@
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <s:a class="nav-link" action="accueil">Accueil</s:a>
+                <s:a class="nav-link" action="accueil"><s:text name="Base.accueil"/></s:a>
             </li>
             <s:if test="#session.user.login != null">
             <li class="nav-item">
-                <s:a class="nav-link" action="parisOuverts">Afficher les matchs</s:a>
+                <s:a class="nav-link" action="parisOuverts"><s:text name="Base.match"/></s:a>
             </li>
             <li class="nav-item">
-                <s:a class="nav-link" action="mesparis">Afficher mes paris</s:a>
+                <s:a class="nav-link" action="mesparis"><s:text name="Base.pari"/></s:a>
             </li>
             <li class="nav-item">
-                <s:a class="nav-link" action="deconnexion">Deconnexion</s:a>
+                <s:a class="nav-link" action="deconnexion"><s:text name="Base.deconnexion"/></s:a>
             </li>
             </s:if>
             <s:else>
             <li class="nav-item">
-                <s:a class="nav-link" action="connexion">Connexion</s:a>
+                <s:a class="nav-link" action="connexion"><s:text name="Connexion.valider"/></s:a>
             </li>
             </s:else>
         </ul>
 
     <s:if test="#session.user.login != null">
         <span class="navbar-text">
-             Utilisateur courant : <b><s:property value="#session.user.login"/></b>
+            <s:text name="Base.utilisateurcourant"/>  <b><s:property value="#session.user.login"/></b>
         </span>
     </s:if>
     </div>
