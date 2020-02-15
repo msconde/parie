@@ -23,7 +23,29 @@
             <li class="nav-item">
                 <s:a class="nav-link" action="accueil">Accueil</s:a>
             </li>
+            <s:if test="#session.user.login != null">
+            <li class="nav-item">
+                <s:a class="nav-link" action="parisOuverts">Afficher les matchs</s:a>
+            </li>
+            <li class="nav-item">
+                <s:a class="nav-link" action="mesparis">Afficher mes paris</s:a>
+            </li>
+            <li class="nav-item">
+                <s:a class="nav-link" action="deconnexion">Deconnexion</s:a>
+            </li>
+            </s:if>
+            <s:else>
+            <li class="nav-item">
+                <s:a class="nav-link" action="connexion">Connexion</s:a>
+            </li>
+            </s:else>
         </ul>
+
+    <s:if test="#session.user.login != null">
+        <span class="navbar-text">
+             Utilisateur courant : <b><s:property value="#session.user.login"/></b>
+        </span>
+    </s:if>
     </div>
 </nav>
 

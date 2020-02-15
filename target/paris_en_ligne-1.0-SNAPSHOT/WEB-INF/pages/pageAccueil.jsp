@@ -13,5 +13,7 @@
 <body>
     <%@include file="base.jsp"%>
     <h1>Bienvenu sur mon site de paris en ligne</h1>
+
+
 </body>
 </html>

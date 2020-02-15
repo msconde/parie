@@ -2,15 +2,66 @@
 <!DOCTYPE struts PUBLIC
         "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
         "http://struts.apache.org/dtds/struts-2.5.dtd">
+
 <struts>
     <constant name="struts.devMode" value="true" />
     <constant name="struts.enable.DynamicMethodInvocation" value="false"/>
 
+
+
     <package name="/" extends="struts-default">
+
+        <interceptors>
+            <interceptor name="login" class="struts.LoginInterceptor"/>
+            <interceptor-stack name="logginStack">
+                <interceptor-ref name="login"/>
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+        </interceptors>
+
+        <default-interceptor-ref name="logginStack"/>
 
         <default-action-ref name="accueil"/>
         <action name="accueil">
             <result>/WEB-INF/pages/pageAccueil.jsp</result>
+        </action>
+
+        <action name="connexion" class="struts.ActionConnection" method="connect">
+            <interceptor-ref name="logginStack"/>
+            <result name="input">/WEB-INF/pages/connexion.jsp</result>
+            <result name="success">/WEB-INF/pages/pageAccueil.jsp</result>
+        </action>
+
+        <action name="deconnexion" class="struts.ActionConnection" method="deconnect">
+            <interceptor-ref name="logginStack"/>
+            <result>/WEB-INF/pages/pageAccueil.jsp</result>
+            <result name="error">WEB-INF/pages/connexion.jsp</result>
+        </action>
+
+        <action name="mesparis" class="struts.ActionParis" method="mesParis">
+            <interceptor-ref name="logginStack"/>
+            <result name="success">WEB-INF/pages/mesParis.jsp</result>
+            <result name="error">WEB-INF/pages/connexion.jsp</result>
+        </action>
+
+        <action name="annulerpari" class="struts.ActionParis" method="supprimerParis">
+            <interceptor-ref name="logginStack"/>
+            <result name="success">WEB-INF/pages/infoPariAnnuler.jsp</result>
+            <result name="input">WEB-INF/pages/mesParis.jsp</result>
+            <result name="error">WEB-INF/pages/connexion.jsp</result>
+        </action>
+
+        <action name="parisOuverts" class="struts.ActionParis" method="parisOuverts">
+            <interceptor-ref name="logginStack"/>
+            <result name="success">WEB-INF/pages/parisOuverts.jsp</result>
+            <result name="error">WEB-INF/pages/connexion.jsp</result>
+        </action>
+
+        <action name="parier" class="struts.ActionParier" method="parier">
+            <interceptor-ref name="logginStack"/>
+            <result name="input">WEB-INF/pages/parier.jsp</result>
+            <result name="success">WEB-INF/pages/infoPariCree.jsp</result>
+            <result name="error">WEB-INF/pages/connexion.jsp</result>
         </action>
     </package>
 
