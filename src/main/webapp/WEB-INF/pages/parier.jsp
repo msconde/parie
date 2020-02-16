@@ -12,7 +12,7 @@
 </head>
 <body>
     <%@include file="base.jsp"%>
-    <h1><s:property value="#session.Pari.match.equipe1"/> vs <s:property value="#session.Pari.match.equipe2"/></h1>
+    <h1><s:property value="#application.Pari.match.equipe1"/> vs <s:property value="#application.Pari.match.equipe2"/></h1>
     <s:form action="parier" method="POST">
         <s:textfield label="Verdict " class="form-control" name="verdict" size="30"/>
         <s:textfield type="number" class="form-control" label="Mise " name="mise" size="30"/>

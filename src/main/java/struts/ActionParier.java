@@ -7,16 +7,18 @@ import facade.exceptions.MatchClosException;
 import facade.exceptions.ResultatImpossibleException;
 import modele.Pari;
 import modele.Utilisateur;
+import org.apache.struts2.interceptor.ApplicationAware;
 
 import java.util.Map;
 
-public class ActionParier extends ActionSupport {
+public class ActionParier extends ActionSupport implements ApplicationAware {
     private int id;
     private int mise;
     private String verdict;
     private Pari pariSelectionner;
     private Pari pariRealise;
     Map<String, Object> session = ActionContext.getContext().getSession();
+    Map<String, Object> application;
     private FacadeParis fp = (FacadeParis) session.get("fp");
     private Utilisateur user = (Utilisateur) session.get("user");
 
@@ -60,18 +62,23 @@ public class ActionParier extends ActionSupport {
         this.pariRealise = pariRealise;
     }
 
+    @Override
+    public void setApplication(Map<String, Object> map) {
+        this.application = map;
+    }
+
     public String parier()
     {
-        if(session.get("Pari") != null)
+        if(application.get("Pari") != null)
         {
-            Pari pari = (Pari)session.get("Pari");
+            Pari pari = (Pari)application.get("Pari");
 
             if(verdict != null && mise > 0)
             {
                 try {
                     fp.parier(user.getLogin(), pari.getIdPari(), verdict, mise);
                     pariRealise = (Pari) fp.getMesParis(user.getLogin()).toArray()[fp.getMesParis(user.getLogin()).size()-1];
-                    session.remove("Pari");
+                    application.remove("Pari");
                     return SUCCESS;
                 } catch (MatchClosException | ResultatImpossibleException e) {
                     return INPUT;
@@ -86,7 +93,9 @@ public class ActionParier extends ActionSupport {
     {
         if(id != 0) {
             pariSelectionner = fp.getPari(id);
-            session.put("Pari", pariSelectionner);
+            application.put("Pari", pariSelectionner);
         }
     }
+
+
 }
