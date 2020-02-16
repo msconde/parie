@@ -11,15 +11,15 @@ import org.apache.struts2.interceptor.ApplicationAware;
 
 import java.util.Map;
 
-public class ActionParier extends ActionSupport implements ApplicationAware {
+public class ActionParier extends ActionSupport {
     private int id;
     private int mise;
     private String verdict;
     private Pari pariSelectionner;
     private Pari pariRealise;
     Map<String, Object> session = ActionContext.getContext().getSession();
-    Map<String, Object> application;
-    private FacadeParis fp = (FacadeParis) session.get("fp");
+    Map<String, Object> application = ActionContext.getContext().getApplication();
+    private FacadeParis fp = (FacadeParis) application.get("fp");
     private Utilisateur user = (Utilisateur) session.get("user");
 
     public int getId() {
@@ -60,11 +60,6 @@ public class ActionParier extends ActionSupport implements ApplicationAware {
 
     public void setPariRealise(Pari pariRealise) {
         this.pariRealise = pariRealise;
-    }
-
-    @Override
-    public void setApplication(Map<String, Object> map) {
-        this.application = map;
     }
 
     public String parier()

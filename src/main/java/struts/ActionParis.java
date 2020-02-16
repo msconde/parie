@@ -14,10 +14,12 @@ import java.util.Map;
 public class ActionParis extends ActionSupport {
     private Collection<Pari> mesParis;
     private Collection<Pari> parisOuverts;
-    Map<String, Object> session = ActionContext.getContext().getSession();
     private int id;
     private Pari pariAnnule;
-    private FacadeParis fp = (FacadeParis) session.get("fp");
+    Map<String, Object> session = ActionContext.getContext().getSession();
+    Map<String, Object> application = ActionContext.getContext().getApplication();
+
+    private FacadeParis fp = (FacadeParis) application.get("fp");
     private Utilisateur user = (Utilisateur) session.get("user");
 
     public Collection<Pari> getMesParis() {

@@ -8,14 +8,16 @@ import facade.FacadeParisStaticImpl;
 import facade.exceptions.InformationsSaisiesIncoherentesException;
 import facade.exceptions.UtilisateurDejaConnecteException;
 import modele.Utilisateur;
+import org.apache.struts2.interceptor.ApplicationAware;
 import org.apache.struts2.interceptor.SessionAware;
 
 import java.util.Map;
 
-public class ActionConnection extends ActionSupport implements SessionAware {
+public class ActionConnection extends ActionSupport implements SessionAware, ApplicationAware {
     private FacadeParis facadeParis;
 
     private Map<String,Object> session;
+    private Map<String, Object> application;
 
     private String username,password;
 
@@ -44,13 +46,18 @@ public class ActionConnection extends ActionSupport implements SessionAware {
         return session;
     }
 
+    @Override
+    public void setApplication(Map<String, Object> map) {
+        this.application = map;
+    }
+
     private FacadeParis getModel()
     {
-        FacadeParis model = (FacadeParis) session.get("model");
+        FacadeParis model = (FacadeParis) application.get("model");
         if(model == null)
         {
             model = new FacadeParisStaticImpl();
-            session.put("model", model);
+            application.put("model", model);
         }
         return model;
     }
@@ -63,7 +70,7 @@ public class ActionConnection extends ActionSupport implements SessionAware {
             try {
                 Utilisateur currentUser = model.connexion(username, password);
                 session.put("user", currentUser);
-                session.put("fp", model);
+                application.put("fp", model);
             } catch (UtilisateurDejaConnecteException | InformationsSaisiesIncoherentesException e) {
                 return INPUT;
             }
@@ -71,5 +78,6 @@ public class ActionConnection extends ActionSupport implements SessionAware {
         }
         return INPUT;
     }
+
 
 }

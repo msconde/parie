@@ -7,10 +7,12 @@ import java.util.Map;
 
 public class ActionDeconnection extends ActionSupport {
     Map<String, Object> session = ActionContext.getContext().getSession();
+    Map<String,Object> application = ActionContext.getContext().getApplication();
 
     public String deconnect()
     {
         session.clear();
+        application.clear();
         return SUCCESS;
     }
 }
