@@ -62,19 +62,14 @@ public class ActionParier extends ActionSupport {
 
     public String parier()
     {
-        if(id != 0) {
-            session.put("idParier", id);
-        }
-
-        if((int) session.get("idParier") != 0)
+        if(session.get("Pari") != null)
         {
-            int id = (int)session.get("idParier");
+            Pari pari = (Pari)session.get("Pari");
 
-            pariSelectionner = fp.getPari(id);
             if(verdict != null && mise > 0)
             {
                 try {
-                    fp.parier(user.getLogin(), id, verdict, mise);
+                    fp.parier(user.getLogin(), pari.getIdPari(), verdict, mise);
                     pariRealise = (Pari) fp.getMesParis(user.getLogin()).toArray()[fp.getMesParis(user.getLogin()).size()-1];
                     return SUCCESS;
                 } catch (MatchClosException | ResultatImpossibleException e) {
@@ -83,5 +78,16 @@ public class ActionParier extends ActionSupport {
             }
         }
         return INPUT;
+    }
+
+    @Override
+    public void validate()
+    {
+        System.err.println(id);
+
+        if(id != 0) {
+            pariSelectionner = fp.getPari(id);
+            session.put("Pari", pariSelectionner);
+        }
     }
 }
