@@ -71,6 +71,7 @@ public class ActionParier extends ActionSupport {
                 try {
                     fp.parier(user.getLogin(), pari.getIdPari(), verdict, mise);
                     pariRealise = (Pari) fp.getMesParis(user.getLogin()).toArray()[fp.getMesParis(user.getLogin()).size()-1];
+                    session.remove("Pari");
                     return SUCCESS;
                 } catch (MatchClosException | ResultatImpossibleException e) {
                     return INPUT;
@@ -83,8 +84,6 @@ public class ActionParier extends ActionSupport {
     @Override
     public void validate()
     {
-        System.err.println(id);
-
         if(id != 0) {
             pariSelectionner = fp.getPari(id);
             session.put("Pari", pariSelectionner);
