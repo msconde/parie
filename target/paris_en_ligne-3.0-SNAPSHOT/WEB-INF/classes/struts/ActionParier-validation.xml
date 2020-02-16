@@ -7,7 +7,7 @@
         <field-validator type="int" short-circuit="true">
             <param name="min">1</param>
             <param name="max">9999999999</param>
-            <message>Vous devez saisir un montant positif pour votre mise</message>
+            <message key="Parier.mise"/>
         </field-validator>
     </field>
 </validators>

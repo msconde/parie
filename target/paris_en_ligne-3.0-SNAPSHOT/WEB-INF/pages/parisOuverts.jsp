@@ -23,7 +23,7 @@
                 </s:url>
 
                 <s:a href="%{parisURL}">
-                    parier
+                    <s:text name="parisOuvert.parier"/>
                 </s:a>
             </li>
         </s:iterator>
