@@ -3,7 +3,6 @@ package struts;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import facade.FacadeParis;
-import facade.FacadeParisStaticImpl;
 import facade.exceptions.OperationNonAuthoriseeException;
 import modele.Pari;
 import modele.Utilisateur;

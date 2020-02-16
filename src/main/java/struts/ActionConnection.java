@@ -1,8 +1,6 @@
 package struts;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
-import com.opensymphony.xwork2.validator.annotations.Validations;
 import facade.FacadeParis;
 import facade.FacadeParisStaticImpl;
 import facade.exceptions.InformationsSaisiesIncoherentesException;
@@ -14,8 +12,6 @@ import org.apache.struts2.interceptor.SessionAware;
 import java.util.Map;
 
 public class ActionConnection extends ActionSupport implements SessionAware, ApplicationAware {
-    private FacadeParis facadeParis;
-
     private Map<String,Object> session;
     private Map<String, Object> application;
 
