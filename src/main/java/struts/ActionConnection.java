@@ -60,20 +60,24 @@ public class ActionConnection extends ActionSupport implements SessionAware, App
 
     public String connect()
     {
-        FacadeParis model = getModel();
+
         if(username != null && password != null)
         {
-            try {
-                Utilisateur currentUser = model.connexion(username, password);
-                session.put("user", currentUser);
-                application.putIfAbsent("fp", model);
-            } catch (UtilisateurDejaConnecteException | InformationsSaisiesIncoherentesException e) {
-                return INPUT;
-            }
             return SUCCESS;
         }
         return INPUT;
     }
 
-
+    @Override
+    public void validate()
+    {
+        FacadeParis model = getModel();
+        try {
+            Utilisateur currentUser = model.connexion(username, password);
+            session.put("user", currentUser);
+            application.putIfAbsent("fp", model);
+        } catch (UtilisateurDejaConnecteException | InformationsSaisiesIncoherentesException e) {
+            this.addFieldError("username", "Erreur de connexion");
+        }
+    }
 }
