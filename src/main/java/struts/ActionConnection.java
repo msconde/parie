@@ -77,7 +77,7 @@ public class ActionConnection extends ActionSupport implements SessionAware, App
             session.put("user", currentUser);
             application.putIfAbsent("fp", model);
         } catch (UtilisateurDejaConnecteException | InformationsSaisiesIncoherentesException e) {
-            this.addFieldError("username", "Erreur de connexion");
+            this.addFieldError("username", this.getText("Connexion.error"));
         }
     }
 }
