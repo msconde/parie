@@ -18,13 +18,13 @@
     <ul>
     <s:iterator value="mesParis">
         <li>
-            sport : <s:property value="match.sport"/> - <s:property value="match.equipe1"/> vs <s:property value="match.equipe2"/> - le <s:property value="match.quand"/>. Mise de <s:property value="montant"/> sur <s:property value="vainqueur"/>
+            <s:text name="mesParis.sport"/> <s:property value="match.sport"/> - <s:property value="match.equipe1"/> <s:text name="infoPari.vs"/> <s:property value="match.equipe2"/> - <s:text name="infoPari.le"/> <s:property value="match.quand"/>. <s:text name="mesParis.mise"/> <s:property value="montant"/> <s:text name="mesParis.sur"/> <s:property value="vainqueur"/>
             <s:url var="parisURL" action="annulerpari">
                 <s:param name="id" value="idPari"/>
             </s:url>
 
             <s:a href="%{parisURL}">
-                annuler
+                <s:text name="mesParis.annuler" />
             </s:a>
         </li>
     </s:iterator>
