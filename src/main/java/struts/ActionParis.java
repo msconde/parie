@@ -17,9 +17,9 @@ public class ActionParis extends ActionSupport {
     private int id;
     private Pari pariAnnule;
     Map<String, Object> session = ActionContext.getContext().getSession();
-    Map<String, Object> application = ActionContext.getContext().getApplication();
+    Map<String, Object> application;
 
-    private FacadeParis fp = (FacadeParis) application.get("fp");
+    private FacadeParis fp;
     private Utilisateur user = (Utilisateur) session.get("user");
 
     public Collection<Pari> getMesParis() {
@@ -56,18 +56,24 @@ public class ActionParis extends ActionSupport {
 
     public String parisOuverts()
     {
+        application = ActionContext.getContext().getApplication();
+        fp = (FacadeParis) application.get("fp");
         parisOuverts = fp.getAllParis();
         return SUCCESS;
     }
 
     public String mesParis()
     {
+        application = ActionContext.getContext().getApplication();
+        fp = (FacadeParis) application.get("fp");
         mesParis = fp.getMesParis(user.getLogin());
         return SUCCESS;
     }
 
     public String supprimerParis()
     {
+        application = ActionContext.getContext().getApplication();
+        fp = (FacadeParis) application.get("fp");
         if(id != 0)
         {
             try {

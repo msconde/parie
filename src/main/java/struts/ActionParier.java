@@ -7,7 +7,6 @@ import facade.exceptions.MatchClosException;
 import facade.exceptions.ResultatImpossibleException;
 import modele.Pari;
 import modele.Utilisateur;
-import org.apache.struts2.interceptor.ApplicationAware;
 
 import java.util.Map;
 
@@ -18,8 +17,8 @@ public class ActionParier extends ActionSupport {
     private Pari pariSelectionner;
     private Pari pariRealise;
     Map<String, Object> session = ActionContext.getContext().getSession();
-    Map<String, Object> application = ActionContext.getContext().getApplication();
-    private FacadeParis fp = (FacadeParis) application.get("fp");
+    Map<String, Object> application;
+    private FacadeParis fp;
     private Utilisateur user = (Utilisateur) session.get("user");
 
     public int getId() {
@@ -86,6 +85,8 @@ public class ActionParier extends ActionSupport {
     @Override
     public void validate()
     {
+        application = ActionContext.getContext().getApplication();
+        fp = (FacadeParis) application.get("fp");
         if(id != 0) {
             pariSelectionner = fp.getPari(id);
             application.put("Pari", pariSelectionner);

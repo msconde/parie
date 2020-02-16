@@ -70,7 +70,7 @@ public class ActionConnection extends ActionSupport implements SessionAware, App
             try {
                 Utilisateur currentUser = model.connexion(username, password);
                 session.put("user", currentUser);
-                application.put("fp", model);
+                application.putIfAbsent("fp", model);
             } catch (UtilisateurDejaConnecteException | InformationsSaisiesIncoherentesException e) {
                 return INPUT;
             }
